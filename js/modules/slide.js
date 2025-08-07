@@ -71,7 +71,7 @@ export class Slide {
     this.wrapper.addEventListener("touchend", this.onEnd);
   }
 
-  //Slides config
+  // Slides config
 
   slidePosition(slide) {
     const margin = (this.wrapper.offsetWidth - slide.offsetWidth) / 2;
@@ -86,13 +86,14 @@ export class Slide {
   }
 
   slidesIndexNav(index) {
-    const last = this.slideArray.lenght - 1;
+    const last = this.slideArray.length - 1;
     this.index = {
       prev: index ? index - 1 : undefined,
       active: index,
-      next: index == last ? undefined : index + 1,
+      next: index === last ? undefined : index + 1,
     };
   }
+
   changeSlide(index) {
     const activeSlide = this.slideArray[index];
     this.moveSlide(activeSlide.position);
@@ -138,6 +139,7 @@ export class Slide {
 
     this.onResize = debounce(this.onResize.bind(this), 200);
   }
+
   init() {
     this.bindEvents();
     this.transition(true);
@@ -145,7 +147,6 @@ export class Slide {
     this.slidesConfig();
     this.addResizeEvent();
     this.changeSlide(0);
-
     return this;
   }
 }
@@ -170,7 +171,6 @@ export default class SlideNav extends Slide {
   createControl() {
     const control = document.createElement("ul");
     control.dataset.control = "slide";
-
     this.slideArray.forEach((item, index) => {
       control.innerHTML += `<li><a href="#slide${index + 1}">${
         index + 1
